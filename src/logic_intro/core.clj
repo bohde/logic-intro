@@ -10,27 +10,29 @@
 (run* [q]
       succeed)
 
+;; What if we add more terms? 
+(run* [q]
+      fail
+      succeed)
+
+(run* [q]
+      succeed
+      succeed)
+
+
+;; What does `==` do? 
 (run* [q]
       (== 'apple 'banana))
 
-;; What are all the values `q` where `q` unifies to 'apple? 
+;; So does `==` works like equality? 
 (run* [q]
       (== q 'apple))
 
-;; order of unification doesn't matter
+;; What happends when we reverse the order? 
 (run* [q]
       (== 'apple q))
 
-;; Each term is a goal, and each goal needs to succeed
-(run* [q]
-      succeed
-      (== q 'apple))
-
-(run* [q]
-      fail
-      (== q 'apple))
-
-;; What are all the values of `q` where `q` is 'apple and 'banana ? 
+;; What if we have multiple unifications of the same variable? 
 (run* [q]
       (== q 'apple)
       (== q 'banana))
@@ -75,3 +77,4 @@
       (fresh [x y z]
              (== (list x y z) q)
              (membero 'apple q)))
+
